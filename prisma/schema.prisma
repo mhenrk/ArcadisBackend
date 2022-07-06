@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Pontos {
+  id        String   @id @default(uuid())
+  nome      String   @unique
+  xPos      String   @unique
+  yPos      String   @unique
+  createdAt DateTime @default(now())
+
+  Parametros Parametros[]
+  @@map("pontos")
+}
+
+model Parametros {
+  id          String   @id @default(uuid())
+  nome        String   @unique
+  valor       Float
+  data_coleta DateTime @default(now())
+  isViolated  Boolean  @default(false)
+  pontos      Pontos   @relation(fields: [pontosId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt   DateTime @default(now())
+
+  pontosId String
+  @@map("parametros")
+}
+
+model ParamsReferencia {
+  id        String   @id @default(uuid())
+  parametro String
+  unidade   String
+  valor     Float
+  createdAt DateTime @default(now())
+
+  @@map("parametros_referencia")
+}
