@@ -1,0 +1,6 @@
+exports.CadastraParametro = require('./CadastraParametro')
+exports.CadastraPonto = require('./CadastraPonto')
+exports.ListarPontosParametros = require('./ListarPontosParametros')
+exports.PesquisarParametro = require('./PesquisaParametro')
+exports.PesquisaPonto = require('./PesquisaPonto')
+exports.VisualizaViolacao = require('./VisualizaViolacao')
