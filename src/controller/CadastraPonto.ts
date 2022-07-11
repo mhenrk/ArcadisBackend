@@ -5,6 +5,9 @@ const CadastraPonto = async (req: Request, res: Response) => {
   const { nome, xPos, yPos } = req.body;
 
   try {
+
+    
+
     const novoPonto = await prisma.pontos.create({
       data: {
         nome,
@@ -18,7 +21,7 @@ const CadastraPonto = async (req: Request, res: Response) => {
       body: novoPonto,
     });
   } catch (error) {
-    return res.status(500).json({ erro: error.message });
+    console.log(error)
   }
 };
 

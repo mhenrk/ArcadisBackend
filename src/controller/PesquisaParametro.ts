@@ -2,13 +2,13 @@ import prisma from "../config/prisma";
 import { Request, Response } from "express";
 
 const PesquisarParametros = async (req: Request, res: Response) => {
-  const { parametro } = req.query;
+  const { nome } = req.query;
 
   try {
     const query = await prisma.parametros.findFirst({
       where: {
         nome: {
-          contains: `${parametro}`,
+          contains: `${nome}`,
         },
       },
     });
@@ -18,9 +18,7 @@ const PesquisarParametros = async (req: Request, res: Response) => {
       body: query,
     });
   } catch (error) {
-    return res.status(200).json({
-      err: error.message,
-    });
+    console.log(error)
   }
 };
 
