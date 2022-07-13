@@ -5,16 +5,14 @@ const PesquisarParametros = async (req: Request, res: Response) => {
   const { nome } = req.query;
 
   try {
-    const query = await prisma.parametros.findFirst({
+    const query = await prisma.parametros.findMany({
       where: {
-        nome: {
-          contains: `${nome}`,
-        },
+        nome: `${nome}`
       },
     });
 
     return res.status(200).json({
-      message: "OK",
+      message: "Pesquisa de Parametros",
       body: query,
     });
   } catch (error) {
