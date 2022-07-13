@@ -14,9 +14,7 @@ const ListaPontosParametros = async (req: Request, res: Response) => {
             body: listar
         })
     } catch (error) {
-        return res.status(200).json({
-            err: error.message
-        })
+        console.log(error)
     }
 }
 

@@ -23,7 +23,7 @@ model Pontos {
 
 model Parametros {
   id          String   @id @default(uuid())
-  nome        String   @unique
+  nome        String   
   valor       Float
   data_coleta DateTime @default(now())
   isViolated  Boolean?  @default(false)
@@ -37,7 +37,6 @@ model Parametros {
 model ParamsReferencia {
   id        String   @id @default(uuid())
   parametro String
-  unidade   String
   valor     Float
   createdAt DateTime @default(now())
 

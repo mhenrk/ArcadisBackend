@@ -1,16 +1,16 @@
 import { Router } from "express";
-import * as controller from '../controller/index'
+import controllers from "../controller/index";
 
-const controllers = require("../controller/index");
+const routes: Router = Router();
 
 routes.post("/ponto", controllers.CadastraPonto);
-routes.get("/ponto", controllers.PesquisaPonto);
-
 routes.post("/parametro", controllers.CadastraParametro);
-routes.get("/parametro", controllers.PesquisarParametro);
 
 routes.get("/mostrar", controllers.ListarPontosParametros);
+routes.get("/violacoes", controllers.VisualizaViolacao);
+routes.get("/ponto", controllers.PesquisaPonto);
+routes.get("/parametro", controllers.PesquisarParametro);
 
-routes.get("/violacoes", controllers.ListarPontosParametros);
+routes.post("/parametro/referencia", controllers.ParametrosReferencia);
 
 export default routes;

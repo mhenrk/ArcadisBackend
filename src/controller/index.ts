@@ -4,6 +4,7 @@ import ListarPontosParametros from './ListarPontosParametros'
 import PesquisarParametro from './PesquisaParametro'
 import PesquisaPonto from './PesquisaPonto'
 import VisualizaViolacao from './VisualizaViolacao'
+import ParametrosReferencia from './ParametrosReferencia'
 
 export default {
     CadastraParametro,
@@ -11,5 +12,6 @@ export default {
     ListarPontosParametros,
     PesquisarParametro,
     PesquisaPonto,
-    VisualizaViolacao
+    VisualizaViolacao,
+    ParametrosReferencia
 }

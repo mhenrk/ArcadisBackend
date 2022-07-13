@@ -4,6 +4,8 @@ import { Request, Response } from "express";
 const CadastraPonto = async (req: Request, res: Response) => {
   const { nome, xPos, yPos } = req.body;
 
+  console.log(nome, xPos, yPos)
+
   try {
     const novoPonto = await prisma.pontos.create({
       data: {
@@ -18,7 +20,7 @@ const CadastraPonto = async (req: Request, res: Response) => {
       body: novoPonto,
     });
   } catch (error) {
-    return res.status(500).json({ erro: error.message });
+    console.log(error)
   }
 };
 
