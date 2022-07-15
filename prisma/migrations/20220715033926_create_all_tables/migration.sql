@@ -18,11 +18,10 @@ CREATE TABLE `parametros` (
     `nome` VARCHAR(191) NOT NULL,
     `valor` DOUBLE NOT NULL,
     `data_coleta` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `isViolated` BOOLEAN NOT NULL DEFAULT false,
+    `isViolated` BOOLEAN NULL DEFAULT false,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `pontosId` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `parametros_nome_key`(`nome`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -30,7 +29,6 @@ CREATE TABLE `parametros` (
 CREATE TABLE `parametros_referencia` (
     `id` VARCHAR(191) NOT NULL,
     `parametro` VARCHAR(191) NOT NULL,
-    `unidade` VARCHAR(191) NOT NULL,
     `valor` DOUBLE NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
