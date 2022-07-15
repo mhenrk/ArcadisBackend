@@ -8,9 +8,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors())
 
-app.get('/ok', (req, res) => {
-    res.send('ok')
-})
 app.use(routes);
 
-app.listen(process.env.LPORT, () => console.log(`http://localhost:${process.env.LPORT}`));
+app.listen(process.env.LPORT, () => {
+    console.log(`Me inicialize - Control + Click na URL: http://localhost:${process.env.LPORT}/parametro/referencia`)
+});
