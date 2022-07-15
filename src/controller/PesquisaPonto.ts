@@ -5,10 +5,13 @@ const PesquisarPontos = async (req: Request, res: Response) => {
   const { nome } = req.query;  
 
   try {
-    const query = await prisma.pontos.findFirst({
+    const query = await prisma.pontos.findMany({
       where: {
         nome: `${nome}`
       },
+      include: {
+        Parametros: true
+      }
     });
 
     return res.status(200).json({

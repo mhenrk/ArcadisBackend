@@ -40,6 +40,9 @@ const CadastraParametro = async (
   req: Request,
   res: Response
 ) => {
+
+  console.log(req.body)
+
   const { nome, valor, data_coleta, pontosId } = req.body;
 
   try {

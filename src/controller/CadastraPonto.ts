@@ -2,9 +2,8 @@ import prisma from "../config/prisma";
 import { Request, Response } from "express";
 
 const CadastraPonto = async (req: Request, res: Response) => {
-  const { nome, xPos, yPos } = req.body;
 
-  console.log(nome, xPos, yPos)
+  const { nome, xPos, yPos } = req.body;  
 
   try {
     const novoPonto = await prisma.pontos.create({
