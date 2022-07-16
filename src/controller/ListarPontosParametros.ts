@@ -10,11 +10,14 @@ const ListaPontosParametros = async (req: Request, res: Response) => {
         })
 
         return res.status(200).json({
-            message: 'OK',
+            message: "Sucesso",
             body: listar
         })
     } catch (error) {
-        console.log(error)
+        return res.status(404).json({
+            message: 'Erro',
+            body: "Verifique o termo pesquisado"
+        })
     }
 }
 

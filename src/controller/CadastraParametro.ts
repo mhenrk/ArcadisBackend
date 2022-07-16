@@ -11,6 +11,7 @@ interface IParametro {
 
 async function isViolatedParam(param: IParametro) {
   try {
+
     const parametroReferencia = await prisma.paramsReferencia.findFirstOrThrow({
       where: {
         parametro: {
@@ -18,6 +19,8 @@ async function isViolatedParam(param: IParametro) {
         },
       },
     });
+
+    if(!parametroReferencia) return new Error('Parametro informado não cadastrado')
 
     if (parametroReferencia instanceof Error) return new Error();
 
@@ -41,8 +44,6 @@ const CadastraParametro = async (
   res: Response
 ) => {
 
-  console.log(req.body)
-
   const { nome, valor, data_coleta, pontosId } = req.body;
 
   try {
@@ -58,11 +59,14 @@ const CadastraParametro = async (
     isViolatedParam(novoParametro);
 
     return res.status(201).json({
-      message: "CREATED",
+      message: "Sucesso",
       body: novoParametro,
     });
   } catch (error) {
-    console.log(error);
+    return res.status(400).json({
+      message: "Erro",
+      body: "Verifique o campo valor",
+    });
   }
 };
 

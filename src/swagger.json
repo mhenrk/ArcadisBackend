@@ -1,0 +1,362 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API",
+    "description": "API2",
+    "termsOfService": "http://localhost:3000/termos",
+    "contact": {
+      "email": "marciohenr__@hotmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:6001",
+      "description": "Servidor de Desenvolvimento"
+    }
+  ],
+  "paths": {
+    "/ponto": {
+      "post": {
+        "summary": "Cadastro de Pontos",
+        "description": "Rota que realiza o cadastramento de um ponto na base de dados",
+        "tags": ["Ponto"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ponto"
+              },
+              "examples": {
+                "ponto exemplo 01": {
+                  "value": {
+                    "nome": "Ponto 01",
+                    "xPos": "21.3816",
+                    "yPos": "41.4479"
+                  }
+                },
+                "ponto exemplo 02": {
+                  "value": {
+                    "nome": "Ponto 02",
+                    "xPos": "1.38516",
+                    "yPos": "4.479"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Ponto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ponto já cadastrado"
+          }
+        }
+      },
+      "get": {
+        "summary": "Lista todos pontos e parametros cadastrados",
+        "description": "Busca e exibe todos pontos e seus parametros",
+        "tags": ["Ponto"],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Ponto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Verifique o termo pesquisado"
+          }
+        }
+      }
+    },
+    "/ponto/pesquisar": {
+      "get": {
+        "summary": "Pesquisar um ponto",
+        "description": "Busca e exibe um ponto e seus parametros",
+        "tags": ["Ponto"],
+        "parameters": [
+            {
+                "name": "nome",
+                "in": "query",
+                "description": "Nome do ponto",
+                "required": true
+            }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Ponto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ocorreu um erro"
+          }
+        }
+      }
+    },    
+    "/parametro": {
+      "post": {
+        "summary": "Cadastro de Parametros",
+        "description": "Rota responsavel por cadastrar um parametro pada um dado ponto - pontosId",
+        "tags": ["Parametro"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Parametro"
+              },
+              "examples": {
+                "parametro": {
+                  "value": {
+                    "nome": "Parametro 01",
+                    "valor": 21.3816,
+                    "data_coleta": "2022-07-15T00:12:48.370Z",
+                    "pontosId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Parametro"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Verifique o campo valor"
+          }
+        }
+      },
+      "get": {
+        "summary": "Lista todos parametros e seus respectivos pontos associados",
+        "description": "Busca e exibe todos parametros e seus pontos associados",
+        "tags": ["Parametro"],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Parametro"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ocorreu um erro"
+          }
+        }
+      }
+    },
+    "/parametro/pesquisar": {
+        "get": {
+          "summary": "Pesquisar um parametro",
+          "description": "Busca e exibe um parametro e seu ponto associado",
+          "tags": ["Parametro"],
+          "parameters": [
+              {
+                  "name": "nome",
+                  "in": "query",
+                  "description": "Nome do parametro",
+                  "required": true
+              }
+          ],
+          "responses": {
+            "200": {
+              "description": "Sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/Parametro"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Ocorreu um erro"
+            }
+          }
+        }
+    },
+    "/parametro/violacoes": {
+        "get": {
+          "summary": "Pesquisa na base de dados todos os parametros violados",
+          "description": "Lista todos os parametros que durante o cadastramento foram apontados como violados",
+          "tags": ["Parametro"],        
+          "responses": {
+            "200": {
+              "description": "Sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/Parametro"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Ocorreu um erro"
+            }
+          }
+        }
+    },
+    "/parametro/referencia": {
+        "get": {
+          "summary": "Inicializa tabela de parametros de referencia",
+          "description": "Rota responsável por cadastrar todos os pontos de referencia usados durante o cadastramento de um parametro para saber se viola os valores de base",
+          "tags": ["Parametro"],        
+          "responses": {
+            "200": {
+              "description": "Sucesso"              
+            },
+            "400": {
+              "description": "Servidor não inicializado corretamente"
+            }
+          }
+        }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Ponto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "xPos": {
+            "type": "string"
+          },
+          "yPos": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "Parametros": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "valor": {
+                "type": "number",
+                "format": "float"
+              },
+              "data_coleta": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "isViolated": {
+                "type": "boolean",
+                "default": false
+              },
+              "pontosId": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        }
+      },
+      "Parametro": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "number",
+            "format": "float"
+          },
+          "data_coleta": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isViolated": {
+            "type": "boolean",
+            "default": false
+          },
+          "pontosId": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "ParametroReferencia": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parametro": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "number",
+            "format": "float"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      }
+    }
+  }
+}

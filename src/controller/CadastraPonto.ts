@@ -15,11 +15,14 @@ const CadastraPonto = async (req: Request, res: Response) => {
     });
 
     return res.status(201).json({
-      message: "CREATED",
+      message: "Sucesso",
       body: novoPonto,
     });
   } catch (error) {
-    console.log(error)
+    return res.status(400).json({
+      message: "Erro",
+      body: "Ponto já cadastrado",
+    });
   }
 };
 

@@ -2,7 +2,7 @@ import prisma from "../config/prisma";
 import { Request, Response } from "express";
 
 const ParametrosReferencia = async (req: Request, res: Response) => {
-    
+
     try {
         const novoParametroRerefencia = await prisma.paramsReferencia.createMany({
             data: [
@@ -42,11 +42,14 @@ const ParametrosReferencia = async (req: Request, res: Response) => {
         })
 
         return res.status(201).json({
-            message: 'OK',
+            message: 'Sucesso',
             body: "Parametros de Referencia cadastrados"
         })
     } catch (error) {
-        console.log(error)
+        return res.status(404).json({
+            message: 'Erro',
+            body: "Servidor não inicializado corretamente."
+        })
     }
 }
 

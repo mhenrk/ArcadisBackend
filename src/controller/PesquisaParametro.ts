@@ -12,11 +12,14 @@ const PesquisarParametros = async (req: Request, res: Response) => {
     });
 
     return res.status(200).json({
-      message: "Pesquisa de Parametros",
+      message: "Sucesso",
       body: query,
     });
   } catch (error) {
-    console.log(error)
+    return res.status(400).json({
+      message: "Erro",
+      body: "Ocorreu um erro",
+    });
   }
 };
 
