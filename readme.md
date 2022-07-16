@@ -50,12 +50,12 @@ src/controller:
 src/routes:
 
 Rotas:
-- GET /mostrar - resposável por recuperar na base de dados todos os pontos e parametros cadastrados
-- GET /violações - resposável por recuperar na base de dados todos os parametros violados
-- GET /ponto - responsável por realizar a pesquisa de um ponto
-- GET /parametro - responsável por realizar a pesquisa de um parametro
-- GET /parametros - responsável por listar todos os parametros da aplicação
-
 - POST /ponto - realiza o cadastro na base de dados
+- GET /ponto - resposável por recuperar na base de dados todos os pontos e parametros cadastrados
+- GET /ponto/pesquisar - responsável por realizar a pesquisa de um ponto
+
 - POST /parametro - realiza o cadastro e validação se o ponto informado está ou não violado conforme tabela de parametros de referencia
-- POST /parametro/referencia - responsável pela inicialização da tabela de parametros de referencia (utilizado para validação no cadastro de parametros.)
+- GET /parametro - responsável por listar todos os parametros da aplicação
+- GET /parametro/pesquisar - responsável por realizar a pesquisa de um parametro
+- GET /parametro/violações - resposável por recuperar na base de dados todos os parametros violados
+- GET /parametro/referencia - responsável pela inicialização da tabela de parametros de referencia (utilizado para validação no cadastro de parametros.)
