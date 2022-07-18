@@ -18,8 +18,8 @@
   "paths": {
     "/ponto": {
       "post": {
-        "summary": "Cadastro de Pontos",
-        "description": "Rota que realiza o cadastramento de um ponto na base de dados",
+        "summary": "Cadastrar Ponto",
+        "description": "Realiza o cadastro de um ponto por nome, posição x e posição y",
         "tags": ["Ponto"],
         "requestBody": {
           "content": {
@@ -31,8 +31,8 @@
                 "ponto exemplo 01": {
                   "value": {
                     "nome": "Ponto 01",
-                    "xPos": "21.3816",
-                    "yPos": "41.4479"
+                    "xPos": "1.3816",
+                    "yPos": "4.4479"
                   }
                 },
                 "ponto exemplo 02": {
@@ -64,7 +64,7 @@
         }
       },
       "get": {
-        "summary": "Lista todos pontos e parametros cadastrados",
+        "summary": "Exibe todos pontos e parametros",
         "description": "Busca e exibe todos pontos e seus parametros",
         "tags": ["Ponto"],
         "responses": {
@@ -80,7 +80,7 @@
             }
           },
           "400": {
-            "description": "Verifique o termo pesquisado"
+            "description": "Ocorreu um erro"
           }
         }
       }
@@ -88,7 +88,7 @@
     "/ponto/pesquisar": {
       "get": {
         "summary": "Pesquisar um ponto",
-        "description": "Busca e exibe um ponto e seus parametros",
+        "description": "Realiza consulta de um ou mais pontos",
         "tags": ["Ponto"],
         "parameters": [
             {
@@ -111,15 +111,15 @@
             }
           },
           "400": {
-            "description": "Ocorreu um erro"
+            "description": "Informe um termo para pesquisar"
           }
         }
       }
     },    
     "/parametro": {
       "post": {
-        "summary": "Cadastro de Parametros",
-        "description": "Rota responsavel por cadastrar um parametro pada um dado ponto - pontosId",
+        "summary": "Cadastrar Parametro",
+        "description": "Realiza o cadastro de um ponto por nome, valor, data_coleta e pontosId",
         "tags": ["Parametro"],
         "requestBody": {
           "content": {
@@ -128,12 +128,28 @@
                 "$ref": "#/components/schemas/Parametro"
               },
               "examples": {
-                "parametro": {
+                "DBO": {
                   "value": {
-                    "nome": "Parametro 01",
-                    "valor": 21.3816,
+                    "nome": "DBO",
+                    "valor": 5.1,
                     "data_coleta": "2022-07-15T00:12:48.370Z",
-                    "pontosId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                    "pontosId": ""
+                  }
+                },
+                "Alumínio dissolvido": {
+                  "value": {
+                    "nome": "Alumínio dissolvido",
+                    "valor": 0.1,
+                    "data_coleta": "2022-07-15T00:12:48.370Z",
+                    "pontosId": ""
+                  }
+                },
+                "Cobre dissolvido": {
+                  "value": {
+                    "nome": "CCobre dissolvido",
+                    "valor": 0.009,
+                    "data_coleta": "2022-07-15T00:12:48.370Z",
+                    "pontosId": ""
                   }
                 }
               }
@@ -158,7 +174,7 @@
         }
       },
       "get": {
-        "summary": "Lista todos parametros e seus respectivos pontos associados",
+        "summary": "Lista todos parametros cadastrados",
         "description": "Busca e exibe todos parametros e seus pontos associados",
         "tags": ["Parametro"],
         "responses": {
@@ -182,7 +198,7 @@
     "/parametro/pesquisar": {
         "get": {
           "summary": "Pesquisar um parametro",
-          "description": "Busca e exibe um parametro e seu ponto associado",
+          "description": "Busca e exibe um parametro por query string",
           "tags": ["Parametro"],
           "parameters": [
               {
@@ -205,15 +221,15 @@
               }
             },
             "400": {
-              "description": "Ocorreu um erro"
+              "description": "Informe um termo para pesquisar"
             }
           }
         }
     },
     "/parametro/violacoes": {
         "get": {
-          "summary": "Pesquisa na base de dados todos os parametros violados",
-          "description": "Lista todos os parametros que durante o cadastramento foram apontados como violados",
+          "summary": "Exibe todos parametros violados",
+          "description": "Busca e exibe todos parametros cadastrados como violados",
           "tags": ["Parametro"],        
           "responses": {
             "200": {
@@ -236,14 +252,14 @@
     "/parametro/referencia": {
         "get": {
           "summary": "Inicializa tabela de parametros de referencia",
-          "description": "Rota responsável por cadastrar todos os pontos de referencia usados durante o cadastramento de um parametro para saber se viola os valores de base",
+          "description": "Faz a inserção na base de dados de todos parametros de referência",
           "tags": ["Parametro"],        
           "responses": {
             "200": {
               "description": "Sucesso"              
             },
             "400": {
-              "description": "Servidor não inicializado corretamente"
+              "description": "Tabela já inicializada"
             }
           }
         }
@@ -329,11 +345,11 @@
           },
           "pontosId": {
             "type": "string",
-            "format": "date-time"
+            "format": "uuid"
           },
           "createdAt": {
             "type": "string",
-            "format": "uuid"
+            "format": "date-time"
           }
         }
       },
@@ -353,7 +369,7 @@
           },
           "createdAt": {
             "type": "string",
-            "format": "uuid"
+            "format": "date-time"
           }
         }
       }

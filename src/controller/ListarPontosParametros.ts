@@ -16,7 +16,7 @@ const ListaPontosParametros = async (req: Request, res: Response) => {
     } catch (error) {
         return res.status(404).json({
             message: 'Erro',
-            body: "Verifique o termo pesquisado"
+            body: "Ocorreu um erro"
         })
     }
 }

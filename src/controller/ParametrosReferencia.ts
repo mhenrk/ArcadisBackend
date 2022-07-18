@@ -2,8 +2,16 @@ import prisma from "../config/prisma";
 import { Request, Response } from "express";
 
 const ParametrosReferencia = async (req: Request, res: Response) => {
-
+    
     try {
+        const findAllParametrosReferencia = await prisma.paramsReferencia.findMany()
+
+        if(findAllParametrosReferencia.length > 0) {
+            return res.status(400).json({
+                message: 'Tabela já inicializada'
+            })
+        }
+
         const novoParametroRerefencia = await prisma.paramsReferencia.createMany({
             data: [
                 {
@@ -43,7 +51,7 @@ const ParametrosReferencia = async (req: Request, res: Response) => {
 
         return res.status(201).json({
             message: 'Sucesso',
-            body: "Parametros de Referencia cadastrados"
+            body: "Parametros de referencia cadastrados"
         })
     } catch (error) {
         return res.status(404).json({

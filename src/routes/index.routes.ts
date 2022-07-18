@@ -13,5 +13,4 @@ routes.get("/parametro/pesquisar", controllers.PesquisarParametro); //ok
 routes.get("/parametro/violacoes", controllers.VisualizaViolacao); //ok
 routes.get("/parametro/referencia", controllers.ParametrosReferencia);
 
-
 export default routes;
