@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "rootDir": "src",
+    "outDir": "./build"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

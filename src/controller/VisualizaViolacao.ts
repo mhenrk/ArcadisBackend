@@ -4,16 +4,6 @@ import { Request, Response } from "express";
 const VisualisarViolacao = async (req: Request, res: Response) => {
     try {
 
-        const pontosParametrosViolados = await prisma.pontos.findMany({
-            where: {
-                Parametros: {
-                    some: {
-                        isViolated: true
-                    }
-                }
-            }
-        })
-
         const listarParametrosViolados = await prisma.parametros.findMany({
             include: {
                 pontos: true
@@ -23,14 +13,15 @@ const VisualisarViolacao = async (req: Request, res: Response) => {
             }
         })
 
-        console.log(listarParametrosViolados)
-
         return res.status(200).json({
-            message: 'Registros Encontrados',
+            message: "Sucesso",
             body: listarParametrosViolados
         })
     } catch (error) {
-        console.log(error)
+         return res.status(400).json({
+            message: "Erro",
+            body: "Ocorreu um erro"
+        })
     }
 }
 
