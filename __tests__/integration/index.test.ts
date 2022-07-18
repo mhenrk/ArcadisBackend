@@ -6,7 +6,7 @@ import { app } from "../../src/app";
 describe("POST /ponto", () => {
   test("Cadastra um novo ponto", async () => {
     const data = {
-      nome: "Ponto 001",
+      nome: "Ponto 00",
       xPos: "2.1123",
       yPos: "54.5160",
     };
@@ -16,6 +16,7 @@ describe("POST /ponto", () => {
       .send(data)
       .expect(201)
       .then((response) => {
+        expect(response.body.body).toHaveProperty("id");
         expect(response.body.message).toEqual("Sucesso");
       });
 
@@ -41,7 +42,7 @@ describe("GET /ponto", () => {
 //PESQUISAR UM PONTO
 describe("GET /ponto/pesquisar", () => {
   test("Pesquisa um ponto via query string", async () => {
-    const query = "Ponto 01";
+    const query = "Ponto 00";
 
     const resp = await request(app).get(`/ponto/pesquisar?nome=${query}`);
     expect(resp.body.message).toEqual("Sucesso");
@@ -63,16 +64,18 @@ describe("GET /ponto/pesquisar", () => {
 //CADASTRA UM PARAMETRO
 describe("POST /parametro", () => {
   test("Cadastra um novo parametro", async () => {
-    const query = "Ponto 01";
+    const query = "Ponto 00";
     const now = new Date();
 
     const resp = await request(app).get(`/ponto/pesquisar?nome=${query}`);
+
+    console.log(resp.body.body[0].id)
 
     const data = {
       nome: "DBO",
       valor: 6.99,
       data_coleta: now,
-      pontosId: resp.body.body.id,
+      pontosId: resp.body.body[0].id,
     };
 
     await request(app)
@@ -139,7 +142,7 @@ describe('GET /parametro/referencia', () => {
 //VALIDA SE UM PARAMETRO FOI VIOLADO DURANTE O CADASTRO
 describe('POST /parametro', () => {
   test('Valida se um parametro está violado', async () => {
-    const query = "Ponto 01";
+    const query = "Ponto 00";
     const now = new Date();
 
     const resp = await request(app).get(`/ponto/pesquisar?nome=${query}`);
@@ -148,7 +151,7 @@ describe('POST /parametro', () => {
       nome: "DBO",
       valor: 6.99,
       data_coleta: now,
-      pontosId: resp.body.body.id,
+      pontosId: resp.body.body[0].id,
     };
 
     await request(app)
@@ -175,7 +178,7 @@ describe('GET /parametro/referencia', () => {
 describe("POST /ponto", () => {
   test("Erro ao tentar cadastrar ponto igual", async () => {
     const data = {
-      nome: "Ponto 001",
+      nome: "Ponto 00",
       xPos: "2.1123",
       yPos: "54.5160",
     };

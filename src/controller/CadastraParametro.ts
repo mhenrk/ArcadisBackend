@@ -65,7 +65,7 @@ const CadastraParametro = async (
   } catch (error) {
     return res.status(400).json({
       message: "Erro",
-      body: error.message,
+      body: error,
     });
   }
 };
