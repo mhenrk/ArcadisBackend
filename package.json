@@ -6,6 +6,7 @@
   "author": "Marcio H <marcio.o@github.com>",
   "license": "MIT",
   "scripts": {
+    "start": "nodemon src/server.ts",
     "dev": "yarn prisma migrate dev --name initial && yarn test && nodemon src/server.ts",
     "test": "jest"
   },
